@@ -11,11 +11,11 @@
     "url": "git+https://github.com/mhs-npm-packages/url-query-params.git"
   },
   "keywords": [
-    "url",
-    "query"
+    "urlquery",
+    "queryparams"
   ],
   "author": "Muhammad Hamza Saeed",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/mhs-npm-packages/url-query-params/issues"
   },
