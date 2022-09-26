@@ -11,6 +11,6 @@ In Node.js:
 // Load function.
 var getUrlQueryParams = require('url-query-params');
 // Call funciton.
-getUrlQueryParams(['name', 'pageNumber', 'pageSize'], { name: 'Hamza', pageNumber: '1', pageSize: '10' })
+getUrlQueryParams(['name', 'pageNumber', 'pageSize'], { name: 'Query', pageNumber: '1', pageSize: '10' })
 // { name: 'Query', pageNumber: 1, pageSize: 10 }
 ```
