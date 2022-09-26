@@ -1,6 +1,6 @@
 {
   "name": "url-query-params",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple function to filter out url query parameters",
   "main": "index.js",
   "scripts": {
