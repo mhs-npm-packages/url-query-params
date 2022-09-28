@@ -1,35 +1,41 @@
 const _ = require('lodash');
 
-module.exports = function getUrlQueryParams(keys, payload) {
-    let newPayload = {};
-    if (Array.isArray(keys) && _.size(keys)) {
-        // filter all value with type string
-        keys = _.filter(keys, (item) => { return typeof item == 'string' })
+module.exports = function getUrlQueryParams(filter, query) {
+    let filteredQuery = {};
+    if (Array.isArray(filter) && _.size(filter)) {
 
-        if (payload && typeof payload == 'object') {
-            keys.forEach(key => {
-                // undefined, Null, Empty string
-                if (payload[key] == undefined || _.isNull(payload[key]) || _.isEmpty(payload[key])) {
-                    newPayload[key] = null;
+        // Filter array
+        filter = _.filter(filter, ({ key, defaultValue }) => { return key && typeof key == 'string' })
+
+        if (query && typeof query == 'object') {
+            filter.forEach(({ key, defaultValue }) => {
+
+                let value = query[key]
+                // undefined, Null
+                if (value == undefined || _.isNull(value)) {
+                    filteredQuery[key] = defaultValue || null;
                 }
                 else {
-                    let value = payload[key];
-                    // Boolean 
+                    // Boolean
                     if (value == 'true' || value == 'false') {
-                        newPayload[key] = value == 'true' ? true : false
+                        filteredQuery[key] = value == 'true' ? true : false
+                    }
+                    // Array or Object
+                    else if (typeof value == 'object' || typeof value == 'array') {
+                        filteredQuery[key] = value;
                     }
                     // Numbers
                     else {
-                        newPayload[key] = !isNaN(value) ? parseInt(value) : value;
+                        filteredQuery[key] = _.isNumber(value) ? parseInt(value) : value;
                     }
-
                 }
             });
         } else {
-            keys.forEach(key => {
-                newPayload[key] = null;
+            filter.forEach(({ key, defaultValue }) => {
+                filteredQuery[key] = defaultValue || null;
             });
         }
     }
-    return newPayload
+
+    return filteredQuery
 }
